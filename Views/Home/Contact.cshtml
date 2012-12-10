@@ -6,31 +6,27 @@
 
 @using (Html.BeginForm()) { 
     @Html.ValidationSummary(true) 
-    <fieldset> 
+    <fieldset style="width:200px"> 
         <legend>Contactenos</legend> 
         <div class="editor-label"> 
-            @Html.LabelFor(model => model.From) 
+            @Html.LabelFor(model => model.Asunto) 
         </div> 
         <div class="editor-field"> 
-            @Html.TextBoxFor(model => model.From) 
-            @Html.ValidationMessageFor(model => model.From) 
+            @Html.TextBoxFor(model => model.Asunto) 
+            @Html.ValidationMessageFor(model => model.Asunto) 
         </div> 
         <div class="editor-label"> 
-            @Html.LabelFor(model => model.Subject) 
+            @Html.LabelFor(model => model.Mensaje) 
         </div> 
         <div class="editor-field"> 
-            @Html.TextBoxFor(model => model.Subject) 
-            @Html.ValidationMessageFor(model => model.Subject) 
-        </div> 
-        <div class="editor-label"> 
-            @Html.LabelFor(model => model.Message) 
-        </div> 
-        <div class="editor-field"> 
-            @Html.TextBoxFor(model => model.Message) 
-            @Html.ValidationMessageFor(model => model.Message) 
+            @Html.TextAreaFor(model => model.Mensaje) 
+            @Html.ValidationMessageFor(model => model.Mensaje) 
+
         </div> 
         <p> 
             <input type="submit" value="Enviar" /> 
         </p> 
     </fieldset> 
+ 
+
 }

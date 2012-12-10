@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Configuration;
 using System.Net.Mail;
+using System.Net; 
 using Womyads.Models;
 
 
@@ -14,26 +15,37 @@ namespace Womyads.Models
     public class EnvMail
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string From { get; set; }
+        public string Asunto { get; set; }
 
         [Required]
-        public string Subject { get; set; }
-
-        [Required]
-        public string Message { get; set; }
+        public string Mensaje { get; set; }
     }
-    public class Email
+     public class Email
     {
-        public void Send(EnvMail contact)
-        {
-            MailMessage mail = new MailMessage(
-                contact.From,
-                ConfigurationManager.AppSettings[ContactToEmail],
-                contact.Subject,
-                contact.Message);
-            new SmtpClient().Send(mail);
-        }
+         public void Send(EnvMail datos)
+         {
+
+             var desde = new MailAddress("alejandrorodriguezperalta@gmail.com", "Diego Rodriguez");
+             var destino = new MailAddress("alejandrorodriguezperalta@gmail.com", "Diego Rodriguez");
+             const string fromPassword = "dianita0318";
+
+             var smtp = new SmtpClient
+             {
+                 Host = "smtp.gmail.com",
+                 Port = 587,
+                 EnableSsl = true,
+                 DeliveryMethod = SmtpDeliveryMethod.Network,
+                 UseDefaultCredentials = false,
+                 Credentials = new NetworkCredential(desde.Address, fromPassword)
+             };
+
+                 MailMessage correo = new MailMessage(desde, destino);
+                 correo.Subject = datos.Asunto;
+                 correo.Body = datos.Mensaje;
+                 smtp.Send(correo);
+
+         }
+        
     }
 }
- 
+    

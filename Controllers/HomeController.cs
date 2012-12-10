@@ -14,7 +14,7 @@ namespace Womyads.Controllers
         
         public ActionResult Index()
         {
-            ViewBag.Message = "";
+            ViewBag.Mensaje = "";
 
             return View();
         }
@@ -35,15 +35,15 @@ namespace Womyads.Controllers
                 return View(envmail);
             }
  
-            var contact = new EnvMail
+            var datos = new EnvMail
             {
-                From = envmail.From,
-                Subject = envmail.Subject,
-                Message = envmail.Message
+                Asunto = envmail.Asunto,
+                Mensaje = envmail.Mensaje
             };
- 
-            new Email().Send(contact);
-            return RedirectToAction("Index");
+            
+            new Email().Send(datos);
+            return View(new EnvMail());
         }
+
      }
 }
